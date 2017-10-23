@@ -1,7 +1,9 @@
 #include "breakout.h"
-
+#include <iostream>
 #include <QPainter>
 #include<QApplication>
+
+using namespace std;
 
 Breakout::Breakout(QWidget *parent) : QWidget(parent) {
     // instanciando todos os objetos e modelos
@@ -13,7 +15,6 @@ Breakout::Breakout(QWidget *parent) : QWidget(parent) {
     gameStarted = false;
     ball = new Ball();
     paddle = new Paddle();
-
     int k = 0;
     // instanciando 30 blocos no jogo
     for(int i=0; i<5; i++) {
@@ -40,10 +41,10 @@ void Breakout::paintEvent(QPaintEvent *e) {
     // jogo terminado: game over aparece na tela
     // jogo ganho: texto de vitória aparece
     if(gameOver) {
-        QString message = QString("Game Over... Score: " + score);
+        QString message = "Game Over...";
         finishGame(&painter, message);
     } else if(gameWon) {
-        QString message = QString("You Win!!! Score: " + score);
+        QString message = "You Win!!!";
         finishGame(&painter, message);
     } else {
         drawObjects(&painter);
@@ -52,7 +53,7 @@ void Breakout::paintEvent(QPaintEvent *e) {
 
 // pinta o texto na tela de acordo com o resultado
 void Breakout::finishGame(QPainter *painter, QString message) {
-    QFont font("Comic", 15, QFont::DemiBold);
+    QFont font("helvetica", 9, QFont::DemiBold);
     QFontMetrics fm(font);
     int textWidth = fm.width(message);
 
@@ -153,6 +154,8 @@ void Breakout::startGame() {
         gameOver = false;
         gameWon = false;
         gameStarted = true;
+        score = 0;
+        life = 3;
         timerId = startTimer(DELAY);
     }
 }
@@ -164,6 +167,7 @@ void Breakout::pauseGame() {
         gamePaused = false;
     } else {
         gamePaused = true;
+        cout<<"pontos: "<<score<<endl<<"vidas: "<<life<<endl;
         killTimer(timerId);
     }
 }
@@ -185,10 +189,11 @@ void Breakout::checkCollision() {
     // bola e barra voltam à posição inicial
     // caso a vida chegue a 0, o jogo termina
     if(ball->getRect().bottom() > BOTTOM_EDGE) {
-        if(life!= 0) {
+        if(life > 0) {
             life--;
             paddle->resetState();
             ball->resetState();
+            pauseGame();
         }
         else {
             stopGame();
@@ -197,7 +202,6 @@ void Breakout::checkCollision() {
 
     for(int i=0, j=0; i<N_OF_BRICKS; i++) {
         if(brick[i]->isDestroyed()) {
-            score++;
             j++;
         }
         if(j == N_OF_BRICKS) {
@@ -270,6 +274,7 @@ void Breakout::checkCollision() {
                     }
 
                     brick[i]->setDestroyed(true);
+                    score++;
                   }
         }
     }

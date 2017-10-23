@@ -4,7 +4,7 @@
 using namespace std;
 
 Brick::Brick(int x, int y) {
-    image.load("brick.png");
+    image.load(":/images/brick.png");
     destroyed = false;
     rect = image.rect();
     rect.translate(x,y);

@@ -5,7 +5,7 @@ using namespace std;
 
 Paddle::Paddle() {
     dx = 0;
-    image.load("paddle.png");
+    image.load(":/images/paddle.png");
 
     rect = image.rect();
     resetState();

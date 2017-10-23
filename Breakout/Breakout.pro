@@ -35,3 +35,6 @@ HEADERS += \
     paddle.h \
     brick.h \
     ball.h
+
+RESOURCES += \
+ ./resources/application.qrc

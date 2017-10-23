@@ -36,7 +36,7 @@ private:
     // timerId para controlar o tempo do jogo, necessário para Pause
     int timerId;
     // adicionando pontuação a cada checkCollision() ou cada vez q N_OF_BRICKS diminui 1.
-    int score;
+    int score=0;
     // adicionando vidas para o jogo (máximo 3);
     int life = 3;
     static const int N_OF_BRICKS = 30;
