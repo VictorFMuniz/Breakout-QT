@@ -4,8 +4,7 @@
         <file>../images/brick.png</file>
         <file>../images/paddle.png</file>
         <file>../assets/breakout_pieces.png</file>
-        <file>../assets/hit.aiff</file>
-        <file>../assets/hitb.wav</file>
+        <file>../assets/hitpad.wav</file>
         <file>../assets/more_breakout_pieces.png</file>
         <file>../assets/sound.mp3</file>
         <file>../ball.cpp</file>

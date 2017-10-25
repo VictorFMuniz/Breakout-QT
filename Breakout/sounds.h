@@ -11,17 +11,20 @@ public:
     ~Sounds();
 
     void bgmusic(int);
-    void fail(int);
-    void gameover(int);
-    void hitpad(int);
-    void hitblk(int);
-    void win(int);
+    void failEff(int);
+    void gameoverEff(int);
+    void hitpadEff(int);
+    void hitblkEff(int);
+    void winEff(int);
 
 private:
     QMediaPlaylist *playlist;
     QMediaPlayer *player;
-    QSoundEffect *efx;
-
+    QSoundEffect *fail;
+    QSoundEffect *win;
+    QSoundEffect *gameover;
+    QSoundEffect *hitpad;
+    QSoundEffect *hitblk;
 };
 
 
