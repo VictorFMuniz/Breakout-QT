@@ -22,8 +22,7 @@ void Paddle::setDx(int x) {
 void Paddle::move() {
     int x = rect.x() + dx;
     int y = rect.top();
-
-    rect.moveTo(x,y);
+        rect.moveTo(x,y);
 }
 
 void Paddle::resetState() {
@@ -36,4 +35,12 @@ QRect Paddle::getRect() {
 
 QImage& Paddle::getImage() {
     return image;
+}
+
+int Paddle::getX(){
+    return rectX();
+}
+
+int Paddle::getY(){
+    return rectY();
 }

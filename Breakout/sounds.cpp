@@ -31,13 +31,13 @@ void Sounds::gameover(int volume){
 }
 
 void Sounds::hitpad(int volume){
-    efx->setSource(QUrl("qrc:/assets/hit.aiff"));
+    efx->setSource(QUrl("qrc:/assets/hitpad.wav"));
     efx->setVolume(volume);
     efx->play();
 }
 
 void Sounds::hitblk(int volume){
-    efx->setSource(QUrl("qrc:/assets/hitb.wav"));
+    efx->setSource(QUrl("qrc:/assets/hitblk.wav"));
     efx->setVolume(volume);
     efx->play();
 }
