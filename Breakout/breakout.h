@@ -6,6 +6,7 @@
 #include "ball.h"
 #include "brick.h"
 #include "paddle.h"
+#include "sounds.h"
 
 class Breakout : public QWidget
 {
@@ -43,6 +44,7 @@ private:
     // DELAY control a velocidade do jogo
     static const int DELAY = 10;
     static const int BOTTOM_EDGE = 400;
+    Sounds* sound;
     Ball* ball;
     Brick* brick[N_OF_BRICKS];
     Paddle* paddle;

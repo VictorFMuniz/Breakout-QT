@@ -1,7 +1,24 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource>
-    <file>../images/ball.png</file>
-    <file>../images/brick.png</file>
-    <file>../images/paddle.png</file>
-</qresource>
+<RCC>
+    <qresource prefix="/">
+        <file>../images/ball.png</file>
+        <file>../images/brick.png</file>
+        <file>../images/paddle.png</file>
+        <file>../assets/breakout_pieces.png</file>
+        <file>../assets/hit.aiff</file>
+        <file>../assets/hitb.wav</file>
+        <file>../assets/more_breakout_pieces.png</file>
+        <file>../assets/sound.mp3</file>
+        <file>../ball.cpp</file>
+        <file>../ball.h</file>
+        <file>../breakout.cpp</file>
+        <file>../breakout.h</file>
+        <file>../brick.cpp</file>
+        <file>../brick.h</file>
+        <file>../main.cpp</file>
+        <file>../paddle.cpp</file>
+        <file>../paddle.h</file>
+        <file>../assets/fail.wav</file>
+        <file>../assets/gameover.wav</file>
+        <file>../assets/win.wav</file>
+    </qresource>
 </RCC>

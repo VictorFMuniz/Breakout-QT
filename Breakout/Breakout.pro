@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,13 +28,15 @@ SOURCES += \
         breakout.cpp \
     paddle.cpp \
     brick.cpp \
-    ball.cpp
+    ball.cpp \
+    sounds.cpp
 
 HEADERS += \
         breakout.h \
     paddle.h \
     brick.h \
-    ball.h
+    ball.h \
+    sounds.h
 
 RESOURCES += \
  ./resources/application.qrc

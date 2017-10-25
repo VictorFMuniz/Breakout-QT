@@ -1,7 +1,9 @@
 #include "breakout.h"
 #include <iostream>
 #include <QPainter>
-#include<QApplication>
+#include <QApplication>
+#include <QMediaPlaylist>
+#include <QMediaPlayer>
 
 using namespace std;
 
@@ -35,15 +37,16 @@ Breakout::~Breakout() {
 
 void Breakout::paintEvent(QPaintEvent *e) {
     Q_UNUSED(e);
-
     QPainter painter(this);
 
     // jogo terminado: game over aparece na tela
     // jogo ganho: texto de vitória aparece
     if(gameOver) {
+
         QString message = "Game Over...";
         finishGame(&painter, message);
     } else if(gameWon) {
+
         QString message = "You Win!!!";
         finishGame(&painter, message);
     } else {
@@ -185,11 +188,13 @@ void Breakout::victory() {
 }
 
 void Breakout::checkCollision() {
+
     // se bola acerta o chão, diminui a vida e
     // bola e barra voltam à posição inicial
     // caso a vida chegue a 0, o jogo termina
     if(ball->getRect().bottom() > BOTTOM_EDGE) {
         if(life > 0) {
+
             life--;
             paddle->resetState();
             ball->resetState();
@@ -202,6 +207,8 @@ void Breakout::checkCollision() {
 
     for(int i=0, j=0; i<N_OF_BRICKS; i++) {
         if(brick[i]->isDestroyed()) {
+
+
             j++;
         }
         if(j == N_OF_BRICKS) {
@@ -210,6 +217,7 @@ void Breakout::checkCollision() {
     }
 
     if(ball->getRect().intersects(paddle->getRect())) {
+
         int paddlePos = paddle->getRect().left();
         int ballPos = ball->getRect().left();
         // barra é dividida em 4 partes
