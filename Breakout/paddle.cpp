@@ -36,11 +36,3 @@ QRect Paddle::getRect() {
 QImage& Paddle::getImage() {
     return image;
 }
-
-int Paddle::getX(){
-    return rectX();
-}
-
-int Paddle::getY(){
-    return rectY();
-}

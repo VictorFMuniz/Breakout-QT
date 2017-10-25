@@ -61,7 +61,14 @@ OBJECTS       = debug/main.o \
 		debug/qrc_application.o \
 		debug/moc_breakout.o
 
-DIST          =  ..\Breakout\breakout.h \
+DIST          = assets/sound.mp3 \
+		assets/fail.wav \
+		assets/gameover.wav \
+		assets/hitblk.wav \
+		assets/hitpad.wav \
+		assets/win.wav \
+		assets/breakout_pieces.png \
+		assets/more_breakout_pieces.png ..\Breakout\breakout.h \
 		..\Breakout\paddle.h \
 		..\Breakout\brick.h \
 		..\Breakout\ball.h \
@@ -128,8 +135,10 @@ debug/qrc_application.cpp: ../Breakout/resources/application.qrc \
 		../Breakout/images/brick.png \
 		../Breakout/images/ball.png \
 		../Breakout/assets/more_breakout_pieces.png \
+		../Breakout/assets/hitblk.wav \
 		../Breakout/assets/sound.mp3 \
 		../Breakout/assets/gameover.wav \
+		../Breakout/assets/hitpad.wav \
 		../Breakout/assets/breakout_pieces.png \
 		../Breakout/assets/fail.wav \
 		../Breakout/assets/win.wav \

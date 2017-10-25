@@ -17,6 +17,8 @@ Breakout::Breakout(QWidget *parent) : QWidget(parent) {
     gameStarted = false;
     ball = new Ball();
     paddle = new Paddle();
+    sound = new Sounds();
+    sound->bgmusic(50);
     int k = 0;
     // instanciando 30 blocos no jogo
     for(int i=0; i<5; i++) {
@@ -30,6 +32,7 @@ Breakout::Breakout(QWidget *parent) : QWidget(parent) {
 Breakout::~Breakout() {
     delete ball;
     delete paddle;
+    delete sound;
     for(int i=0; i<N_OF_BRICKS; i++) {
         delete brick[i];
     }
@@ -42,11 +45,9 @@ void Breakout::paintEvent(QPaintEvent *e) {
     // jogo terminado: game over aparece na tela
     // jogo ganho: texto de vitória aparece
     if(gameOver) {
-
         QString message = "Game Over...";
         finishGame(&painter, message);
     } else if(gameWon) {
-
         QString message = "You Win!!!";
         finishGame(&painter, message);
     } else {
@@ -179,12 +180,14 @@ void Breakout::stopGame() {
     killTimer(timerId);
     gameOver = true;
     gameStarted = false;
+    sound->gameoverEff(30);
 }
 
 void Breakout::victory() {
     killTimer(timerId);
     gameWon = true;
     gameStarted = false;
+    sound->winEff(30);
 }
 
 void Breakout::checkCollision() {
@@ -194,7 +197,7 @@ void Breakout::checkCollision() {
     // caso a vida chegue a 0, o jogo termina
     if(ball->getRect().bottom() > BOTTOM_EDGE) {
         if(life > 0) {
-
+            sound->failEff(30);
             life--;
             paddle->resetState();
             ball->resetState();
@@ -207,8 +210,6 @@ void Breakout::checkCollision() {
 
     for(int i=0, j=0; i<N_OF_BRICKS; i++) {
         if(brick[i]->isDestroyed()) {
-
-
             j++;
         }
         if(j == N_OF_BRICKS) {
@@ -217,6 +218,8 @@ void Breakout::checkCollision() {
     }
 
     if(ball->getRect().intersects(paddle->getRect())) {
+        // faz barulho
+        sound->hitpadEff(30);
 
         int paddlePos = paddle->getRect().left();
         int ballPos = ball->getRect().left();
@@ -254,6 +257,7 @@ void Breakout::checkCollision() {
     for(int i=0; i<N_OF_BRICKS; i++) {
         if((ball->getRect()).intersects(brick[i]->getRect())) {
 
+            // ------------------
             int ballLeft = ball->getRect().left();
             int ballHeight = ball->getRect().height();
             int ballWidth = ball->getRect().width();
@@ -280,7 +284,8 @@ void Breakout::checkCollision() {
                     else if(brick[i]->getRect().contains(pointBottom)) {
                        ball->setYDir(-1);
                     }
-
+                    // faz barulho
+                    sound->hitblkEff(30);
                     brick[i]->setDestroyed(true);
                     score++;
                   }

@@ -40,3 +40,13 @@ HEADERS += \
 
 RESOURCES += \
  ./resources/application.qrc
+
+DISTFILES += \
+    assets/sound.mp3 \
+    assets/fail.wav \
+    assets/gameover.wav \
+    assets/hitblk.wav \
+    assets/hitpad.wav \
+    assets/win.wav \
+    assets/breakout_pieces.png \
+    assets/more_breakout_pieces.png
