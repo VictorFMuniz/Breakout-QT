@@ -14,6 +14,8 @@ public:
     QRect getRect();
     void setRect(QRect);
     QImage& getImage();
+    void setStrength(int);
+    int getStrength();
 
 private:
     QImage image;
@@ -21,6 +23,9 @@ private:
     // quando um tijolo é destruído,
     // destroyed = true;
     bool destroyed;
+    // alguns tijolos terão mais força
+    // (precisam de até 2 batidas para quebrarem)
+    int strength;
 };
 
 #endif // BRICK_H

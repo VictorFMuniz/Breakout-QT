@@ -30,6 +30,14 @@ bool Brick::isDestroyed() {
     return destroyed;
 }
 
+int Brick::getStrength() {
+    return strength;
+}
+
+void Brick::setStrength(int st) {
+    strength = st;
+}
+
 void Brick::setDestroyed(bool destroy) {
     destroyed = destroy;
 }

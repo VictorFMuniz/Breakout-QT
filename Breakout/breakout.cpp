@@ -24,6 +24,11 @@ Breakout::Breakout(QWidget *parent) : QWidget(parent) {
     for(int i=0; i<5; i++) {
         for(int j=0; j<6; j++) {
             brick[k] = new Brick(j*40+30, i*10+50);
+            if(i==0) {
+                brick[k]->setStrength(2);
+            } else {
+                brick[k]->setStrength(1);
+            }
             k++;
         }
     }
@@ -286,8 +291,11 @@ void Breakout::checkCollision() {
                     }
                     // faz barulho
                     sound->hitblkEff(30);
-                    brick[i]->setDestroyed(true);
-                    score++;
+                    brick[i]->setStrength(brick[i]->getStrength()-1);
+                    if(brick[i]->getStrength() == 0) {
+                        brick[i]->setDestroyed(true);
+                        score++;
+                    }
                   }
         }
     }
