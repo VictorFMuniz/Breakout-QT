@@ -16,7 +16,7 @@ public:
     void hitpadEff(int);
     void hitblkEff(int);
     void winEff(int);
-
+    void stop();
 private:
     QMediaPlaylist *playlist;
     QMediaPlayer *player;

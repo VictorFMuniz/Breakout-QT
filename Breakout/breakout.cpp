@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QMediaPlaylist>
 #include <QMediaPlayer>
-
+#include <QMouseEvent>
 using namespace std;
 
 Breakout::Breakout(QWidget *parent) : QWidget(parent) {
@@ -18,7 +18,6 @@ Breakout::Breakout(QWidget *parent) : QWidget(parent) {
     ball = new Ball();
     paddle = new Paddle();
     sound = new Sounds();
-    sound->bgmusic(50);
     int k = 0;
     // instanciando 30 blocos no jogo
     for(int i=0; i<5; i++) {
@@ -62,11 +61,12 @@ void Breakout::paintEvent(QPaintEvent *e) {
 
 // pinta o texto na tela de acordo com o resultado
 void Breakout::finishGame(QPainter *painter, QString message) {
-    QFont font("helvetica", 9, QFont::DemiBold);
+    QFont font("system", 32, QFont::DemiBold);
     QFontMetrics fm(font);
     int textWidth = fm.width(message);
 
     painter->setFont(font);
+    painter->setPen(Qt::white);
     int h = height();
     int w = width();
 
@@ -118,6 +118,24 @@ void Breakout::keyReleaseEvent(QKeyEvent *e) {
     }
 }
 
+
+// método que faz checagem do mouse
+void Breakout::mouseReleaseEvent(QMouseEvent *e) {
+
+    switch(e->button()) {
+        case Qt::RightButton:
+            pauseGame();
+        break;
+        case Qt::LeftButton:
+            gameStarted = false;
+            startGame();
+        break;
+        default:
+        QWidget::mouseReleaseEvent(e);
+    }
+}
+
+
 // método que gera ações de acordo com as teclas pressionadas
 void Breakout::keyPressEvent(QKeyEvent *e) {
     int dx = 0;
@@ -133,8 +151,9 @@ void Breakout::keyPressEvent(QKeyEvent *e) {
         paddle->setDx(dx);
 
     break;
-    case Qt::Key_P:
-        pauseGame();
+    case Qt::Key_R:
+        gameStarted = false;
+        startGame();
 
     break;
     case Qt::Key_Space:
@@ -142,6 +161,10 @@ void Breakout::keyPressEvent(QKeyEvent *e) {
 
     break;
     case Qt::Key_Escape:
+        qApp ->exit();
+
+    break;
+    case Qt::Key_Q:
         qApp ->exit();
 
     break;
@@ -153,6 +176,8 @@ void Breakout::keyPressEvent(QKeyEvent *e) {
 // reseta a posição dos objetos para a posição inicial
 void Breakout::startGame() {
     if(!gameStarted) {
+        if (timerId > 0)killTimer(timerId);
+        sound->bgmusic(50);
         ball->resetState();
         paddle->resetState();
 
@@ -165,6 +190,8 @@ void Breakout::startGame() {
         gameStarted = true;
         score = 0;
         life = 3;
+        timerId = startTimer(DELAY);
+    }else{
         timerId = startTimer(DELAY);
     }
 }
@@ -185,6 +212,7 @@ void Breakout::stopGame() {
     killTimer(timerId);
     gameOver = true;
     gameStarted = false;
+    sound->stop();
     sound->gameoverEff(30);
 }
 
@@ -192,6 +220,7 @@ void Breakout::victory() {
     killTimer(timerId);
     gameWon = true;
     gameStarted = false;
+    sound->stop();
     sound->winEff(30);
 }
 

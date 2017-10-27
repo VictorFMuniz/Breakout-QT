@@ -29,6 +29,10 @@ void Sounds::bgmusic(int volume){
     player->play();
 }
 
+void Sounds::stop(){
+    player->stop();
+}
+
 void Sounds::failEff(int volume){
     fail->setSource(QUrl("qrc:/assets/fail.wav"));
     fail->setVolume(volume);

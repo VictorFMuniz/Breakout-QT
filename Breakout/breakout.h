@@ -21,6 +21,7 @@ protected:
     void timerEvent(QTimerEvent *);
     // barra controlada por teclas
     void keyPressEvent(QKeyEvent *);
+    void mouseReleaseEvent(QMouseEvent *);
     void keyReleaseEvent(QKeyEvent *);
     void drawObjects(QPainter *);
     void finishGame(QPainter*, QString);
