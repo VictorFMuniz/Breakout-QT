@@ -1,6 +1,8 @@
+
 #include "paddle.h"
 #include <iostream>
-
+#define MAX_X 300
+#define MAX_Y 400
 using namespace std;
 
 Paddle::Paddle() {
@@ -21,6 +23,11 @@ void Paddle::setDx(int x) {
 
 void Paddle::move() {
     int x = rect.x() + dx;
+    if(x <=0){
+        x=rect.x();
+    }
+    if(rect.x() + rect.width() + dx >= MAX_X )
+        x=rect.x();
     int y = rect.top();
         rect.moveTo(x,y);
 }

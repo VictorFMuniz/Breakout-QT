@@ -17,8 +17,8 @@ CXXFLAGS      = -fno-keep-inline-dllexport -pipe -O2 -std=gnu++11 -Wextra -Wall 
 INCPATH       = -I..\Breakout -I. -I..\..\..\Qt\5.9.1\mingw53_32\include -I..\..\..\Qt\5.9.1\mingw53_32\include\QtMultimedia -I..\..\..\Qt\5.9.1\mingw53_32\include\QtWidgets -I..\..\..\Qt\5.9.1\mingw53_32\include\QtGui -I..\..\..\Qt\5.9.1\mingw53_32\include\QtANGLE -I..\..\..\Qt\5.9.1\mingw53_32\include\QtNetwork -I..\..\..\Qt\5.9.1\mingw53_32\include\QtCore -Irelease -I..\..\..\Qt\5.9.1\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        -lmingw32 -LD:\Qt\5.9.1\mingw53_32\lib D:\Qt\5.9.1\mingw53_32\lib\libqtmain.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 D:\Qt\5.9.1\mingw53_32\lib\libQt5Multimedia.a D:\Qt\5.9.1\mingw53_32\lib\libQt5Widgets.a D:\Qt\5.9.1\mingw53_32\lib\libQt5Gui.a D:\Qt\5.9.1\mingw53_32\lib\libQt5Network.a D:\Qt\5.9.1\mingw53_32\lib\libQt5Core.a 
-QMAKE         = D:\Qt\5.9.1\mingw53_32\bin\qmake.exe
+LIBS        =        -lmingw32 -LC:\Qt\5.9.1\mingw53_32\lib C:\Qt\5.9.1\mingw53_32\lib\libqtmain.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 C:\Qt\5.9.1\mingw53_32\lib\libQt5Multimedia.a C:\Qt\5.9.1\mingw53_32\lib\libQt5Widgets.a C:\Qt\5.9.1\mingw53_32\lib\libQt5Gui.a C:\Qt\5.9.1\mingw53_32\lib\libQt5Network.a C:\Qt\5.9.1\mingw53_32\lib\libQt5Core.a 
+QMAKE         = C:\Qt\5.9.1\mingw53_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
@@ -36,8 +36,8 @@ MKDIR         = mkdir
 INSTALL_FILE    = copy /y
 INSTALL_PROGRAM = copy /y
 INSTALL_DIR     = xcopy /s /q /y /i
-QINSTALL        = D:\Qt\5.9.1\mingw53_32\bin\qmake.exe -install qinstall
-QINSTALL_PROGRAM = D:\Qt\5.9.1\mingw53_32\bin\qmake.exe -install qinstall -exe
+QINSTALL        = C:\Qt\5.9.1\mingw53_32\bin\qmake.exe -install qinstall
+QINSTALL_PROGRAM = C:\Qt\5.9.1\mingw53_32\bin\qmake.exe -install qinstall -exe
 
 ####### Output directory
 
@@ -913,6 +913,7 @@ release/qrc_application.cpp: ../Breakout/resources/application.qrc \
 		../../../Qt/5.9.1/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		../../../Qt/5.9.1/mingw53_32/include/QtGui/qguiapplication.h \
 		../../../Qt/5.9.1/mingw53_32/include/QtGui/qinputmethod.h \
+		../../../Qt/5.9.1/mingw53_32/include/QtGui/QMouseEvent \
 		../../../Qt/5.9.1/mingw53_32/include/QtGui/QImage \
 		../../../Qt/5.9.1/mingw53_32/include/QtGui/qimage.h \
 		../../../Qt/5.9.1/mingw53_32/include/QtGui/qtguiglobal.h \
@@ -984,7 +985,7 @@ release/qrc_application.cpp: ../Breakout/resources/application.qrc \
 		../../../Qt/5.9.1/mingw53_32/include/QtCore/qline.h \
 		../../../Qt/5.9.1/mingw53_32/include/QtGui/qpainterpath.h \
 		../../../Qt/5.9.1/mingw53_32/include/QtCore/QRect
-	D:\Qt\5.9.1\mingw53_32\bin\rcc.exe -name application ..\Breakout\resources\application.qrc -o release\qrc_application.cpp
+	C:\Qt\5.9.1\mingw53_32\bin\rcc.exe -name application ..\Breakout\resources\application.qrc -o release\qrc_application.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h
 compiler_moc_predefs_clean:
@@ -1129,7 +1130,7 @@ release/moc_breakout.cpp: ../../../Qt/5.9.1/mingw53_32/include/QtWidgets/QWidget
 		../Breakout/breakout.h \
 		release/moc_predefs.h \
 		../../../Qt/5.9.1/mingw53_32/bin/moc.exe
-	D:\Qt\5.9.1\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -ID:/Qt/5.9.1/mingw53_32/mkspecs/win32-g++ -ID:/ProjetoQT/Breakout-QT/Breakout -ID:/Qt/5.9.1/mingw53_32/include -ID:/Qt/5.9.1/mingw53_32/include/QtMultimedia -ID:/Qt/5.9.1/mingw53_32/include/QtWidgets -ID:/Qt/5.9.1/mingw53_32/include/QtGui -ID:/Qt/5.9.1/mingw53_32/include/QtANGLE -ID:/Qt/5.9.1/mingw53_32/include/QtNetwork -ID:/Qt/5.9.1/mingw53_32/include/QtCore -I. -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Breakout\breakout.h -o release\moc_breakout.cpp
+	C:\Qt\5.9.1\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -IC:/Qt/5.9.1/mingw53_32/mkspecs/win32-g++ -IC:/Projeto/Breakout-Qt/Breakout -IC:/Qt/5.9.1/mingw53_32/include -IC:/Qt/5.9.1/mingw53_32/include/QtMultimedia -IC:/Qt/5.9.1/mingw53_32/include/QtWidgets -IC:/Qt/5.9.1/mingw53_32/include/QtGui -IC:/Qt/5.9.1/mingw53_32/include/QtANGLE -IC:/Qt/5.9.1/mingw53_32/include/QtNetwork -IC:/Qt/5.9.1/mingw53_32/include/QtCore -I. -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\Breakout\breakout.h -o release\moc_breakout.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1430,7 +1431,8 @@ release/breakout.o: ../Breakout/breakout.cpp ../Breakout/breakout.h \
 		../../../Qt/5.9.1/mingw53_32/include/QtCore/qeventloop.h \
 		../../../Qt/5.9.1/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		../../../Qt/5.9.1/mingw53_32/include/QtGui/qguiapplication.h \
-		../../../Qt/5.9.1/mingw53_32/include/QtGui/qinputmethod.h
+		../../../Qt/5.9.1/mingw53_32/include/QtGui/qinputmethod.h \
+		../../../Qt/5.9.1/mingw53_32/include/QtGui/QMouseEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\breakout.o ..\Breakout\breakout.cpp
 
 release/paddle.o: ../Breakout/paddle.cpp ../Breakout/paddle.h \

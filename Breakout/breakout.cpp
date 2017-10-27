@@ -59,6 +59,25 @@ void Breakout::paintEvent(QPaintEvent *e) {
     }
 }
 
+//Desenha pontuação e vida
+void Breakout::hud(QPainter *painter){
+    QFont font("system", 32, QFont::DemiBold);
+    QFontMetrics fm(font);
+    int h = 30;
+    int w = width();
+    painter->setFont(font);
+
+    int textWidth = fm.width(QString::number(score));
+    painter->setPen(Qt::blue);
+    painter->translate(QPoint(w/8, h));
+    painter->drawText(-textWidth/2, 0, "SCORE: "+QString::number(score));
+
+    textWidth = fm.width(QString::number(life));
+    painter->setPen(Qt::red);
+    painter->translate(QPoint(w/2, 0));
+    painter->drawText(-textWidth/2, 0, "LIFE: "+QString::number(life));
+}
+
 // pinta o texto na tela de acordo com o resultado
 void Breakout::finishGame(QPainter *painter, QString message) {
     QFont font("system", 32, QFont::DemiBold);
@@ -72,18 +91,19 @@ void Breakout::finishGame(QPainter *painter, QString message) {
 
     painter->translate(QPoint(w/2, h/2));
     painter->drawText(-textWidth/2, 0, message);
+
 }
 
 // método que desenha os objetos do jogo na tela
 void Breakout::drawObjects(QPainter* painter) {
     painter->drawImage(ball->getRect(), ball->getImage());
     painter->drawImage(paddle->getRect(), paddle->getImage());
-
     for(int i=0; i<N_OF_BRICKS; i++) {
         if(!brick[i] -> isDestroyed()) {
             painter->drawImage(brick[i]->getRect(), brick[i]->getImage());
         }
     }
+    hud(painter);
 }
 
 // método que faz mover os objetos, checa colisão da bola
@@ -99,6 +119,7 @@ void Breakout::timerEvent(QTimerEvent *e) {
 // método que chama movimento dos objetos não-estáticos
 void Breakout::moveObjects() {
     ball->autoMove();
+
     paddle->move();
 }
 
@@ -125,10 +146,10 @@ void Breakout::mouseReleaseEvent(QMouseEvent *e) {
     switch(e->button()) {
         case Qt::RightButton:
             pauseGame();
+            // printar status
         break;
         case Qt::LeftButton:
-            gameStarted = false;
-            startGame();
+            pauseGame();
         break;
         default:
         QWidget::mouseReleaseEvent(e);
@@ -141,6 +162,9 @@ void Breakout::keyPressEvent(QKeyEvent *e) {
     int dx = 0;
 
     switch (e->key()) {
+    case Qt::Key_B:
+        victory();
+    break;
     case Qt::Key_Left:
         dx = -1;
         paddle->setDx(dx);
@@ -152,9 +176,23 @@ void Breakout::keyPressEvent(QKeyEvent *e) {
 
     break;
     case Qt::Key_R:
+        for(int i=0; i<N_OF_BRICKS; i++) {
+            delete brick[i];
+        }
+        int n;
+        n=0;
+        for(int i=0; i<5; i++) {
+            for(int j=0; j<6; j++) {
+                brick[n] = new Brick(j*40+30, i*10+50);
+                if(i==0) {
+                    brick[n]->setStrength(2);
+                } else {
+                    brick[n]->setStrength(1);
+                }
+                n++;
+            }
+        }
         gameStarted = false;
-        startGame();
-
     break;
     case Qt::Key_Space:
         startGame();
@@ -176,7 +214,6 @@ void Breakout::keyPressEvent(QKeyEvent *e) {
 // reseta a posição dos objetos para a posição inicial
 void Breakout::startGame() {
     if(!gameStarted) {
-        if (timerId > 0)killTimer(timerId);
         sound->bgmusic(50);
         ball->resetState();
         paddle->resetState();
@@ -193,6 +230,7 @@ void Breakout::startGame() {
         timerId = startTimer(DELAY);
     }else{
         timerId = startTimer(DELAY);
+        gamePaused = false;
     }
 }
 
@@ -209,7 +247,7 @@ void Breakout::pauseGame() {
 }
 
 void Breakout::stopGame() {
-    killTimer(timerId);
+    pauseGame();
     gameOver = true;
     gameStarted = false;
     sound->stop();

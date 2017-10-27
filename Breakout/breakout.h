@@ -31,6 +31,7 @@ protected:
     void stopGame();
     void victory();
     void checkCollision();
+    void hud(QPainter *);
 
 private:
     // x é a posição atual da barra

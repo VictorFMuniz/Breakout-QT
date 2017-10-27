@@ -21,7 +21,7 @@ private:
     // dx controla direção de movimento da barra:
     int dx;
     // posição inicial da barrinha do jogo
-    static const int INITIAL_X = 200;
+    static const int INITIAL_X = 130;
     static const int INITIAL_Y = 360;
 };
 

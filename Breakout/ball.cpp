@@ -1,6 +1,7 @@
 #include "ball.h"
 #include <iostream>
-
+#define MAX_X 300
+#define MAX_Y 400
 using namespace std;
 
 Ball::Ball() {
@@ -26,13 +27,13 @@ void Ball::autoMove() {
     rect.translate(xdir, ydir);
     // movimentos da bola quando ela bate em alguma das fronteiras
     // se a bola cai no chão, não é rebatida, o jogo termina
-    if(rect.left() == 0) {
+    if(rect.left() <= 0) {
         xdir = 1;
     }
-    if(rect.right() == RIGHT_EDGE) {
+    if(rect.right() >= MAX_X) {
         xdir = -1;
     }
-    if(rect.top() == 0) {
+    if(rect.top() <= 0) {
         ydir = 1;
     }
 }
