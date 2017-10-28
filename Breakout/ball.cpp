@@ -28,10 +28,10 @@ void Ball::autoMove() {
     // movimentos da bola quando ela bate em alguma das fronteiras
     // se a bola cai no chão, não é rebatida, o jogo termina
     if(rect.left() <= 0) {
-        xdir = 1;
+        xdir = 2;
     }
     if(rect.right() >= MAX_X) {
-        xdir = -1;
+        xdir = -2;
     }
     if(rect.top() <= 0) {
         ydir = 1;

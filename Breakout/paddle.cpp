@@ -17,6 +17,10 @@ Paddle::~Paddle() {
     cout << ("Paddle deleted.") << endl;
 }
 
+int Paddle::getDx() {
+    return dx;
+}
+
 void Paddle::setDx(int x) {
     dx = x;
 }

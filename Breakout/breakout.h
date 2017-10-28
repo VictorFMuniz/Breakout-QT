@@ -26,6 +26,7 @@ protected:
     void drawObjects(QPainter *);
     void finishGame(QPainter*, QString);
     void moveObjects();
+    void restartGame();
     void startGame();
     void pauseGame();
     void stopGame();

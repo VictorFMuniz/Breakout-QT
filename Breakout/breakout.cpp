@@ -61,7 +61,7 @@ void Breakout::paintEvent(QPaintEvent *e) {
 
 //Desenha pontuação e vida
 void Breakout::hud(QPainter *painter){
-    QFont font("system", 32, QFont::DemiBold);
+    QFont font("system", 14, QFont::DemiBold);
     QFontMetrics fm(font);
     int h = 30;
     int w = width();
@@ -80,7 +80,7 @@ void Breakout::hud(QPainter *painter){
 
 // pinta o texto na tela de acordo com o resultado
 void Breakout::finishGame(QPainter *painter, QString message) {
-    QFont font("system", 32, QFont::DemiBold);
+    QFont font("system", 14, QFont::DemiBold);
     QFontMetrics fm(font);
     int textWidth = fm.width(message);
 
@@ -176,22 +176,7 @@ void Breakout::keyPressEvent(QKeyEvent *e) {
 
     break;
     case Qt::Key_R:
-        for(int i=0; i<N_OF_BRICKS; i++) {
-            delete brick[i];
-        }
-        int n;
-        n=0;
-        for(int i=0; i<5; i++) {
-            for(int j=0; j<6; j++) {
-                brick[n] = new Brick(j*40+30, i*10+50);
-                if(i==0) {
-                    brick[n]->setStrength(2);
-                } else {
-                    brick[n]->setStrength(1);
-                }
-                n++;
-            }
-        }
+        restartGame();
         gameStarted = false;
     break;
     case Qt::Key_Space:
@@ -208,6 +193,26 @@ void Breakout::keyPressEvent(QKeyEvent *e) {
     break;
     default:
         QWidget::keyPressEvent(e);
+    }
+}
+
+// recomeça o jogo ao pressionar R
+void Breakout::restartGame() {
+    for(int i=0; i<N_OF_BRICKS; i++) {
+        delete brick[i];
+    }
+    int n;
+    n=0;
+    for(int i=0; i<5; i++) {
+        for(int j=0; j<6; j++) {
+            brick[n] = new Brick(j*40+30, i*10+50);
+            if(i==0) {
+                brick[n]->setStrength(2);
+            } else {
+                brick[n]->setStrength(1);
+            }
+            n++;
+        }
     }
 }
 
@@ -293,8 +298,13 @@ void Breakout::checkCollision() {
         // faz barulho
         sound->hitpadEff(30);
 
+        // checa o movimento da barra, e, em determinadas
+        // posições onde a bola bate, de acordo com sua direção,
+        // a bola faz um efeito contrário ou a favor do
+        // movimento da bola.
         int paddlePos = paddle->getRect().left();
         int ballPos = ball->getRect().left();
+
         // barra é dividida em 4 partes
         int first = paddlePos + 8;
         int second = paddlePos + 16;
@@ -302,26 +312,26 @@ void Breakout::checkCollision() {
         int fourth = paddlePos + 32;
     // colisão da bola com a 1a parte
         if(ballPos < first) {
-            ball->setXDir(-1);
+            ball->setXDir(-2);
             ball->setYDir(-1);
         }
    // colisão da bola com a 2a parte
         if(ballPos >= first && ballPos < second) {
-            ball->setXDir(-1);
+            ball->setXDir(1+(2*paddle->getDx()));
             ball->setYDir(-1*ball->getYDir());
         }
    // colisão da bola com a 3a parte
         if(ballPos >= second && ballPos < third) {
-            ball->setXDir(0);
+            ball->setXDir(-1+(-2*paddle->getDx()));
             ball->setYDir(-1);
         }
    // colisão da bola com a 4a parte
         if(ballPos >= third && ballPos < fourth) {
-            ball->setXDir(0);
+            ball->setXDir(1+(-2*paddle->getDx()));
             ball->setYDir(-1*ball->getYDir());
         }
         if(ballPos > fourth) {
-            ball->setXDir(1);
+            ball->setXDir(2);
             ball->setYDir(-1);
         }
     }

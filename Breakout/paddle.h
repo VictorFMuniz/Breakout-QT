@@ -12,6 +12,7 @@ public:
     void resetState();
     void move();
     void setDx(int);
+    int getDx();
     QRect getRect();
     QImage& getImage();
 
