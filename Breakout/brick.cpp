@@ -15,6 +15,7 @@ Brick::~Brick() {
 }
 
 QRect Brick::getRect() {
+    cout << "tijolo: " << rect << endl;
     return rect;
 }
 

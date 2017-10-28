@@ -36,6 +36,7 @@ void Ball::autoMove() {
     if(rect.top() <= 0) {
         ydir = 1;
     }
+    cout << "bola: "<< "(" << xdir << ", " << ydir << ")" << endl;
 }
 
 void Ball::resetState() {

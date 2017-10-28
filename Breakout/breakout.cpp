@@ -214,6 +214,9 @@ void Breakout::restartGame() {
             n++;
         }
     }
+    paddle->resetState();
+    ball->resetState();
+    score = 0;
 }
 
 // reseta a posição dos objetos para a posição inicial
@@ -312,26 +315,26 @@ void Breakout::checkCollision() {
         int fourth = paddlePos + 32;
     // colisão da bola com a 1a parte
         if(ballPos < first) {
-            ball->setXDir(-2);
+            ball->setXDir(-1+(-2*paddle->getDx()));
             ball->setYDir(-1);
         }
    // colisão da bola com a 2a parte
         if(ballPos >= first && ballPos < second) {
-            ball->setXDir(1+(2*paddle->getDx()));
+            ball->setXDir(2*paddle->getDx());
             ball->setYDir(-1*ball->getYDir());
         }
    // colisão da bola com a 3a parte
         if(ballPos >= second && ballPos < third) {
-            ball->setXDir(-1+(-2*paddle->getDx()));
+            ball->setXDir(-2*paddle->getDx());
             ball->setYDir(-1);
         }
    // colisão da bola com a 4a parte
         if(ballPos >= third && ballPos < fourth) {
-            ball->setXDir(1+(-2*paddle->getDx()));
+            ball->setXDir(-2*paddle->getDx());
             ball->setYDir(-1*ball->getYDir());
         }
         if(ballPos > fourth) {
-            ball->setXDir(2);
+            ball->setXDir(1+(2*paddle->getDx()));
             ball->setYDir(-1);
         }
     }

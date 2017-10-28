@@ -18,6 +18,7 @@ Paddle::~Paddle() {
 }
 
 int Paddle::getDx() {
+    cout << "barra: " << dx << endl;
     return dx;
 }
 
